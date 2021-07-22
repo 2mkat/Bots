@@ -6,7 +6,7 @@ import json
 from requests import get
 
 
-class products_titile:
+class products_titel:
 
     def __init__(self, name, price, sale):
         self.name = name
@@ -15,7 +15,7 @@ class products_titile:
 
 class Products(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, products_titile):
+        if isinstance(obj, products_titel):
             return obj.__dict__
         return json.JSONEncoder.default(self, obj)
 
@@ -40,7 +40,7 @@ def parse_price(products_list: list) -> None:
             sale = 100 - (float(second_price_product[0]) * 100) / float(first_price_product[0])
 
         if sale_product:
-            subject = products_titile(name_product[0], second_price_product[0], sale)
+            subject = products_titel(name_product[0], second_price_product[0], sale)
             all_products.append(subject)
 
     with open('sale.json', "w") as outfile:
